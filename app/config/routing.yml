@@ -3,6 +3,3 @@ widget:
     resource: AppBundle\Controller\WidgetController
 
 
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation

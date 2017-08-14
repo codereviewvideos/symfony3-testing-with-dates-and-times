@@ -35,7 +35,7 @@ class DoctrineWidgetRepository
                 ->getManager()
                 ->createQuery(
                     "
-                    SELECT c
+                    SELECT w
                     FROM AppBundle\Entity\Widget w
                     WHERE w.id = :id
                     "

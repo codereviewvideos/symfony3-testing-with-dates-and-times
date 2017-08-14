@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Widget;
+use AppBundle\Repository\WidgetRepository;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -23,25 +24,27 @@ class WidgetController extends FOSRestController implements ClassResourceInterfa
      *
      * @Annotations\Get(path="/widget/{id}")
      *
-     * @param string         $id    the Widget ID
+     * @param string           $id the Widget ID
+     * @param WidgetRepository $widgetRepository
+     *
+     * @return View
      *
      * @Annotations\View(serializerGroups={
      *     "Default",
      *     "timestamps",
-     *     "Widget_all"
+     *     "widget_all"
      * })
      *
-     * @return View
      */
     public function getAction(string $id, WidgetRepository $widgetRepository)
     {
-        $Widget = $widgetRepository->findOneById($id);
+        $widget = $widgetRepository->findOneById($id);
 
-        if ($Widget === null) {
+        if ($widget === null) {
             return new View(null, Response::HTTP_NOT_FOUND);
         }
 
-        return $Widget;
+        return $widget;
     }
 
     /**
@@ -52,11 +55,12 @@ class WidgetController extends FOSRestController implements ClassResourceInterfa
      * @Annotations\View(serializerGroups={
      *     "Default",
      *     "timestamps",
-     *     "Widget_all"
+     *     "widget_all"
      * })
      *
+     * @param WidgetRepository $widgetRepository
+     *
      * @return array
-     * @throws \LogicException
      */
     public function cgetAction(
         WidgetRepository $widgetRepository

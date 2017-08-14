@@ -15,13 +15,13 @@ class WidgetRepository
      */
     private $logger;
     /**
-     * @var \AppBundle\Entity\Repository\WidgetRepository
+     * @var \AppBundle\Entity\Repository\DoctrineWidgetRepository
      */
     private $doctrineWidgetRepo;
 
     public function __construct(
         LoggerInterface $logger,
-        \AppBundle\Entity\Repository\WidgetRepository $doctrineWidgetRepo
+        \AppBundle\Entity\Repository\DoctrineWidgetRepository $doctrineWidgetRepo
     )
     {
         $this->logger = $logger;
@@ -55,7 +55,7 @@ class WidgetRepository
     {
         try {
 
-            return $this->doctrineWidgetRepo->createFindAllQuery();
+            return $this->doctrineWidgetRepo->createFindAllQuery()->getResult();
 
         } catch (\Exception $e) {
 
