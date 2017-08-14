@@ -40,6 +40,29 @@ class WidgetSetupContext implements Context
 
             $this->em->persist($widget);
             $this->em->flush();
+
+
+            $qb = $this->em->createQueryBuilder();
+
+            $query = $qb->update('AppBundle:Widget', 'w')
+                ->set(
+                    'w.createdAt',
+                    $qb->expr()->literal(
+                        (new \DateTimeImmutable($val['created_at']))->format('c')
+                    )
+                )
+                ->set(
+                    'w.updatedAt',
+                    $qb->expr()->literal(
+                        (new \DateTimeImmutable($val['updated_at']))->format('c')
+                    )
+                )
+                ->where('w.id = :id')
+                ->setParameter('id', $widget->getId())
+                ->getQuery()
+            ;
+
+            $query->execute();
         }
     }
 }

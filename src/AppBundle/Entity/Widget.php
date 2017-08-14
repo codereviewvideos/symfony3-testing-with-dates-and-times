@@ -2,16 +2,20 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMSSerializer;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="widget")
+ * @ORM\HasLifecycleCallbacks()
  * @JMSSerializer\ExclusionPolicy("all")
  */
 class Widget
 {
+    use TimestampableTrait;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
