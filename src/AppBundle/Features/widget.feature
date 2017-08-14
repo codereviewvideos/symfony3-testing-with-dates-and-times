@@ -21,6 +21,6 @@ Feature: Manage Widget data via the RESTful API
       """
       {
           "id": 1,
-          "title": "widget A"
+          "name": "Widget A"
       }
       """
