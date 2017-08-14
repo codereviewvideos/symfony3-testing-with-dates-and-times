@@ -38,14 +38,14 @@
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
-        "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0",
-
         "behat/behat": "^3.1",
         "behat/symfony2-extension": "^2.1",
         "behat/web-api-extension": "~1.0@dev",
         "behatch/contexts": "dev-master",
-        "eightpoints/guzzle-bundle": "^6.0"
+        "eightpoints/guzzle-bundle": "^6.0",
+        "phpspec/phpspec": "^4.0",
+        "sensio/generator-bundle": "^3.0",
+        "symfony/phpunit-bridge": "^3.0"
     },
     "scripts": {
         "symfony-scripts": [

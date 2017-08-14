@@ -16,6 +16,7 @@ default:
         - AppBundle\Features\Context\WidgetSetupContext:
             em: "@doctrine.orm.entity_manager"
             clock: "@crv.clock"
+            widgetFactory: "@crv.factory.widget"
         - AppBundle\Features\Context\TimeContext:
             clock: "@crv.clock"
 

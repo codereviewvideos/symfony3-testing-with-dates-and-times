@@ -1,0 +1,6 @@
+services:
+
+    crv.factory.widget:
+        class: AppBundle\Factory\WidgetFactory
+        arguments:
+            - "@crv.clock"

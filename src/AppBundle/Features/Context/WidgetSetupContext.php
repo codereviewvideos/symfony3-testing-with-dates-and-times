@@ -3,6 +3,7 @@
 namespace AppBundle\Features\Context;
 
 use AppBundle\Entity\Widget;
+use AppBundle\Factory\WidgetFactory;
 use AppBundle\Model\Clock;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
@@ -19,6 +20,10 @@ class WidgetSetupContext implements Context
      * @var Clock
      */
     private $clock;
+    /**
+     * @var WidgetFactory
+     */
+    private $widgetFactory;
 
     /**
      * WidgetSetupContext constructor.
@@ -28,11 +33,13 @@ class WidgetSetupContext implements Context
      */
     public function __construct(
         EntityManagerInterface $em,
-        Clock $clock
+        Clock $clock,
+        WidgetFactory $widgetFactory
     )
     {
         $this->em = $em;
         $this->clock = $clock;
+        $this->widgetFactory = $widgetFactory;
     }
 
     /**
@@ -42,35 +49,18 @@ class WidgetSetupContext implements Context
     {
         foreach ($widgets->getColumnsHash() as $key => $val) {
 
-            $widget = (new Widget())
+            $widget = $this->widgetFactory->create()
                 ->setName($val['name'])
+                ->setCreatedAt(
+                    $this->clock->now()->modify($val['created_at'])
+                )
+                ->setUpdatedAt(
+                    $this->clock->now()->modify($val['updated_at'])
+                )
             ;
 
             $this->em->persist($widget);
             $this->em->flush();
-
-
-            $qb = $this->em->createQueryBuilder();
-
-            $query = $qb->update('AppBundle:Widget', 'w')
-                ->set(
-                    'w.createdAt',
-                    $qb->expr()->literal(
-                        $this->clock->now()->modify($val['created_at'])->format('c')
-                    )
-                )
-                ->set(
-                    'w.updatedAt',
-                    $qb->expr()->literal(
-                        $this->clock->now()->modify($val['updated_at'])->format('c')
-                    )
-                )
-                ->where('w.id = :id')
-                ->setParameter('id', $widget->getId())
-                ->getQuery()
-            ;
-
-            $query->execute();
         }
     }
 }

@@ -9,7 +9,6 @@ use JMS\Serializer\Annotation as JMSSerializer;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="widget")
- * @ORM\HasLifecycleCallbacks()
  * @JMSSerializer\ExclusionPolicy("all")
  */
 class Widget

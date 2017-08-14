@@ -27,3 +27,20 @@ Feature: Manage Widget data via a JSON API
           "updated_at": "2019-12-31T23:55:00+0000"
       }
       """
+
+
+  Scenario: Can add a new Widget
+    When I send a "POST" request to "/widget" with body:
+       """
+       {
+          "name": "new widget"
+       }
+       """
+    Then the response code should be 201
+     And I follow the link in the Location response header
+    Then the response should contain json:
+      """
+      {
+          "name": "new widget"
+      }
+      """
