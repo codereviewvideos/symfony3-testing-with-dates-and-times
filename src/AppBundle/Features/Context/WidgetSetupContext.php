@@ -3,6 +3,7 @@
 namespace AppBundle\Features\Context;
 
 use AppBundle\Entity\Widget;
+use AppBundle\Model\Clock;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,17 +15,24 @@ class WidgetSetupContext implements Context
      * @var EntityManagerInterface
      */
     protected $em;
+    /**
+     * @var Clock
+     */
+    private $clock;
 
     /**
      * WidgetSetupContext constructor.
      *
      * @param EntityManagerInterface $em
+     * @param Clock                  $clock
      */
     public function __construct(
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        Clock $clock
     )
     {
         $this->em = $em;
+        $this->clock = $clock;
     }
 
     /**
@@ -48,13 +56,13 @@ class WidgetSetupContext implements Context
                 ->set(
                     'w.createdAt',
                     $qb->expr()->literal(
-                        (new \DateTimeImmutable($val['created_at']))->format('c')
+                        $this->clock->now()->modify($val['created_at'])->format('c')
                     )
                 )
                 ->set(
                     'w.updatedAt',
                     $qb->expr()->literal(
-                        (new \DateTimeImmutable($val['updated_at']))->format('c')
+                        $this->clock->now()->modify($val['updated_at'])->format('c')
                     )
                 )
                 ->where('w.id = :id')

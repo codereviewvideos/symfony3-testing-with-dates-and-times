@@ -1,0 +1,9 @@
+services:
+
+    crv.listener.timestamp:
+        class: AppBundle\Listener\TimestampListener
+        arguments:
+            - "@crv.clock"
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }

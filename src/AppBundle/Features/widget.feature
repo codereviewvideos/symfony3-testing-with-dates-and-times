@@ -6,9 +6,10 @@ Feature: Manage Widget data via a JSON API
 
 
   Background:
-    Given there are Widgets with the following details:
+    Given the system time at the start of this test is "1 January 2020 00:00:00"
+    And there are Widgets with the following details:
       | id | name     | created_at | updated_at |
-      | 1  | Widget A | -4 days    | -5 minutes |
+      | 1  | Widget A | -7 days    | -5 minutes |
       | 2  | Widget B | -1 day     | -1 day     |
       | 3  | Widget C | -6 months  | -3 weeks   |
     And I set header "Content-Type" with value "application/json"
@@ -22,21 +23,7 @@ Feature: Manage Widget data via a JSON API
       {
           "id": 1,
           "name": "Widget A",
-          features: [
-            {
-              "id": 1,
-              "name": "some feature",
-              "created_at": "2015-01-01T00:00:00+0000",
-              "updated_at": "2015-01-01T00:00:00+0000",
-            },
-            {
-              "id": 1,
-              "name": "another feature",
-              "created_at": "2016-01-01T00:00:00+0000",
-              "updated_at": "2016-01-01T00:00:00+0000",
-            }
-          ]
+          "created_at": "2019-12-25T00:00:00+0000",
+          "updated_at": "2019-12-31T23:55:00+0000"
       }
       """
-    And the "created_at" date should be approximately "-4 days"
-    And the "updated_at" date should be approximately "-5 minutes"

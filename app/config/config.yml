@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: services/doctrine_entity_repository.yml }
+    - { resource: services/listener.yml }
     - { resource: services/repository.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed

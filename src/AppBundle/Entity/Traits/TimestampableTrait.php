@@ -59,15 +59,6 @@ trait TimestampableTrait
     }
 
     /**
-     * @ORM\PrePersist()
-     * @return $this
-     */
-    public function setCreatedAtViaPrePersist()
-    {
-        return $this->setCreatedAt();
-    }
-
-    /**
      * Get updated at
      *
      * @return \DateTimeImmutable Updated at

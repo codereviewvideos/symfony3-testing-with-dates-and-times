@@ -15,6 +15,9 @@ default:
             client: "@guzzle.client.local_test_api"
         - AppBundle\Features\Context\WidgetSetupContext:
             em: "@doctrine.orm.entity_manager"
+            clock: "@crv.clock"
+        - AppBundle\Features\Context\TimeContext:
+            clock: "@crv.clock"
 
   extensions:
     Behat\Symfony2Extension:

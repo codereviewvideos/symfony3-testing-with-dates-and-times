@@ -1,0 +1,6 @@
+services:
+
+    crv.clock:
+        class: AppBundle\Model\TestClock
+        arguments:
+            - "@filesystem"

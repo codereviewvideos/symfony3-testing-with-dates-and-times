@@ -1,0 +1,4 @@
+services:
+
+    crv.clock:
+        class: AppBundle\Model\SystemClock
