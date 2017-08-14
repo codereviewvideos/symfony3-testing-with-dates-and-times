@@ -1,4 +1,4 @@
-Feature: Manage Widget data via the RESTful API
+Feature: Manage Widget data via a JSON API
 
   In order to make lots of money selling Widgets
   As a widget manufacturer
