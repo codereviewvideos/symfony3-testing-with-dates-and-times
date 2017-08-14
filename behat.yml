@@ -1,0 +1,26 @@
+default:
+  calls:
+    error_reporting: 16383 # E_ALL & ~E_USER_DREPRECATED
+  suites:
+    default:
+      type: symfony_bundle
+      bundle: AppBundle
+      contexts:
+        - FeatureContext:
+            doctrine: "@doctrine"
+        - AppBundle\Features\Context\BaseContext:
+        - AppBundle\Features\Context\MysqlDatabaseContext:
+            em: "@doctrine.orm.entity_manager"
+        - AppBundle\Features\Context\RestApiContext:
+            client: "@guzzle.client.local_test_api"
+        - AppBundle\Features\Context\WidgetSetupContext:
+            em: "@doctrine.orm.entity_manager"
+
+  extensions:
+    Behat\Symfony2Extension:
+      kernel:
+        env: "acceptance"
+        debug: "true"
+  formatters:
+    pretty:
+      paths: false
